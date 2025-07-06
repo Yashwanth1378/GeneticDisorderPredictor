@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birth Disorder Predictor</title>
+</head>
+<body>
+    <h2>Enter Genetic and Clinical Information</h2>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'predict' %}">
+        {% csrf_token %}
+
+        <label>Maternal Gene:</label>
+        <select name="Maternal gene" required>
+            <option value="">--Select--</option>
+            <option value="BRCA1">BRCA1</option>
+            <option value="CFTR">CFTR</option>
+            <option value="DYRK1A">DYRK1A</option>
+            <option value="FGFR2">FGFR2</option>
+            <option value="None">None</option>
+        </select><br><br>
+
+        <label>Paternal Gene:</label>
+        <select name="Paternal gene" required>
+            <option value="">--Select--</option>
+            <option value="BRCA1">BRCA1</option>
+            <option value="CFTR">CFTR</option>
+            <option value="DYRK1A">DYRK1A</option>
+            <option value="FGFR2">FGFR2</option>
+            <option value="None">None</option>
+        </select><br><br>
+
+        <label>Blood Cell Count (mcL):</label>
+        <input type="number" name="Blood cell count (mcL)" step="0.1" min="3.0" max="6.5" placeholder="e.g., 5.2" required>
+        <small>(Range: 3.0 to 6.5 mcL)</small><br><br>
+
+        <label>Birth Asphyxia:</label>
+        <select name="Birth asphyxia" required>
+            <option value="">--Select--</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label>Serious Maternal Illness:</label>
+        <select name="H/O serious maternal illness" required>
+            <option value="">--Select--</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
